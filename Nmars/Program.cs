@@ -37,6 +37,7 @@ namespace Nmars
                     Console.WriteLine($"{nameof(matchingInstruction.Operation)}: {matchingInstruction.Operation}");
                     Console.WriteLine($"{nameof(matchingInstruction.Syntax)}: {matchingInstruction.Syntax}");
                     Console.WriteLine($"{nameof(matchingInstruction.Encoding)}: {matchingInstruction.Encoding}");
+                    Console.WriteLine($"Decoded instruction: {matchingInstruction.Decode(instructionBinary)}");
                 }
             }
             // ReSharper disable once FunctionNeverReturns

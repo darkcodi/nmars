@@ -1,6 +1,6 @@
 ﻿namespace Nmars.Instructions
 {
-    public class Addi : Instruction
+    public class Addi : MipsInstruction
     {
         public override string Name => "Add immediate (with overflow)";
         public override string Description =>

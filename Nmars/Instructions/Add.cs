@@ -1,6 +1,6 @@
 ﻿namespace Nmars.Instructions
 {
-    public class Add : Instruction
+    public class Add : MipsInstruction
     {
         public override string Name => "Add (with overflow)";
         public override string Description => "Adds two registers and stores the result in a register";

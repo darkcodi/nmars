@@ -10,5 +10,6 @@
         string Encoding { get; }
 
         bool Match(string instructionBinary);
+        string Decode(string instructionBinary);
     }
 }
