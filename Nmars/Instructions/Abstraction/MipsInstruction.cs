@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nmars
+namespace Nmars.Instructions.Abstraction
 {
     public abstract class MipsInstruction : IInstruction
     {
@@ -13,7 +13,7 @@ namespace Nmars
         public abstract string Syntax { get; }
         public abstract string Encoding { get; }
         
-        public bool Match(string instructionBinary)
+        public virtual bool Match(string instructionBinary)
         {
             var encoding = Encoding.Replace(" ", "");
             if (encoding.Length != instructionBinary.Length)
@@ -32,7 +32,7 @@ namespace Nmars
             return true;
         }
 
-        public string Decode(string instructionBinary)
+        public virtual string Decode(string instructionBinary)
         {
             if (!Match(instructionBinary))
                 throw new ArgumentException(nameof(instructionBinary));
@@ -46,12 +46,14 @@ namespace Nmars
                 var value = GetParamValue(instructionBinary, encodingChar);
 
                 bool isRegister = syntaxParts[i].Contains("$");
-                decodedInstruction += isRegister ?
-                    $" {Registers[value]}," :
-                    $" 0x{value:X},";
+                bool isInsideBrackets = syntaxParts[i].Contains("(") && syntaxParts[i].Contains(")");
+                var newPart = isRegister ?
+                    $"{Registers[value]}" :
+                    $"0x{value:X}";
+                decodedInstruction += isInsideBrackets ? $" ({newPart})," : $" {newPart},";
             }
 
-            return decodedInstruction.TrimEnd(',');
+            return decodedInstruction.TrimEnd(',').Replace(", (", " (");
         }
 
         private int GetParamValue(string instructionBinary, char encodingChar)

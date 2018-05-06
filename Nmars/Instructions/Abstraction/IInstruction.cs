@@ -1,4 +1,4 @@
-﻿namespace Nmars
+﻿namespace Nmars.Instructions.Abstraction
 {
     public interface IInstruction
     {

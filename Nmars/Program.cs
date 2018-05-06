@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using Nmars.Instructions.Abstraction;
 
 namespace Nmars
 {
@@ -37,6 +39,7 @@ namespace Nmars
                     Console.WriteLine($"{nameof(matchingInstruction.Operation)}: {matchingInstruction.Operation}");
                     Console.WriteLine($"{nameof(matchingInstruction.Syntax)}: {matchingInstruction.Syntax}");
                     Console.WriteLine($"{nameof(matchingInstruction.Encoding)}: {matchingInstruction.Encoding}");
+                    Console.WriteLine($"Input:    {Regex.Replace(instructionBinary, ".{4}", "$0 ")}");
                     Console.WriteLine($"Decoded instruction: {matchingInstruction.Decode(instructionBinary)}");
                 }
             }
